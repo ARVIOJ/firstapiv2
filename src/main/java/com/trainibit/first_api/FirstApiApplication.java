@@ -10,7 +10,6 @@ public class FirstApiApplication {
 
 		SpringApplication.run(FirstApiApplication.class, args);
 
-
 	}
 
 

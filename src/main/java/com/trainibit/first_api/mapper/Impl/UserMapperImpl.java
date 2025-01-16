@@ -2,6 +2,7 @@ package com.trainibit.first_api.mapper.Impl;
 
 import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.mapper.UserMapper;
+import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,18 @@ public class UserMapperImpl implements UserMapper {
         return userResponseList;
 
     }
+
+//    @Override
+//    public User requestToEntity(UserRequest userRequest) {
+//        User user = new User();
+//
+//        user.setName(userRequest.getFirstName());
+//        user.setLastName(userRequest.getLastName());
+//        user.setBirthday(LocalDate.parse(userRequest.getBirthdate()));
+//        user.setEmail(userRequest.getEmail());
+//        return user;
+//    }
+
 
 
 }

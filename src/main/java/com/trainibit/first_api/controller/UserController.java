@@ -2,12 +2,15 @@ package com.trainibit.first_api.controller;
 
 // importaciones deben ir lexicograficamente
 
+import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
 import com.trainibit.first_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +43,11 @@ public class UserController {
         }
     }
 
-
+//    @PostMapping
+//    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
+//        UserResponse userResponse = userService.saveUser(userRequest);
+//        return ResponseEntity.ok(userResponse);
+//    }
 
 
 
