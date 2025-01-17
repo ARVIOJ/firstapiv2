@@ -12,6 +12,7 @@ public interface UserMapper {
     // ESTO ES NUEVO
     List<UserResponse> entityToResponseList(List<User> users);
 
-//    User requestToEntity(UserRequest userResponse);
+    //post
+    User requestToEntity(UserRequest userRequest);
 
 }

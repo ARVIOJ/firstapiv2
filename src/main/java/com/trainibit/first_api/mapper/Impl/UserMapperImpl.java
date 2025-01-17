@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,6 +40,8 @@ public class UserMapperImpl implements UserMapper {
 
         userResponse.setAge(ageMessage);
 
+        userResponse.setPlanet(user.getPlanet());
+
         return userResponse;
     }
 
@@ -53,16 +56,17 @@ public class UserMapperImpl implements UserMapper {
 
     }
 
-//    @Override
-//    public User requestToEntity(UserRequest userRequest) {
-//        User user = new User();
-//
-//        user.setName(userRequest.getFirstName());
-//        user.setLastName(userRequest.getLastName());
-//        user.setBirthday(LocalDate.parse(userRequest.getBirthdate()));
-//        user.setEmail(userRequest.getEmail());
-//        return user;
-//    }
+    @Override
+    public User requestToEntity(UserRequest userRequest) {
+
+        User user = new User();
+        user.setName(userRequest.getFirstName());
+        user.setLastName(userRequest.getLastName());
+        user.setEmail(userRequest.getEmail());
+        user.setBirthday(LocalDate.parse(userRequest.getBirthdate()));
+
+        return user;
+    }
 
 
 

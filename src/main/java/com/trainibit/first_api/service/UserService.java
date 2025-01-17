@@ -12,5 +12,7 @@ public interface UserService {
     List<UserResponse> findAll();
 
     UserResponse findByUuid(UUID uuid);
-//    UserResponse saveUser(UserRequest userRequest);
+
+    //post
+    UserResponse saveUser(UserRequest userRequest);
 }

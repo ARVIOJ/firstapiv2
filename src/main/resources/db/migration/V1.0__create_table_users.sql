@@ -13,6 +13,7 @@ CREATE TABLE users (
                        created_date timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
                        updated_date timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
                        "uuid" uuid NULL,
+                       "planet" varchar NULL,
                        CONSTRAINT users_pk PRIMARY KEY (id)
 );
 

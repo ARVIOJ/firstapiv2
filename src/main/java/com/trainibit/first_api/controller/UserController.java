@@ -2,6 +2,7 @@ package com.trainibit.first_api.controller;
 
 // importaciones deben ir lexicograficamente
 
+import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
 import com.trainibit.first_api.service.UserService;
@@ -43,11 +44,11 @@ public class UserController {
         }
     }
 
-//    @PostMapping
-//    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
-//        UserResponse userResponse = userService.saveUser(userRequest);
-//        return ResponseEntity.ok(userResponse);
-//    }
+    @PostMapping
+    public ResponseEntity<UserResponse> saveUser(@RequestBody UserRequest userRequest) {
+        UserResponse newUser = userService.saveUser(userRequest);
+        return ResponseEntity.ok(newUser);
+    }
 
 
 
