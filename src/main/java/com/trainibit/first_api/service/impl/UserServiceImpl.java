@@ -1,6 +1,5 @@
 package com.trainibit.first_api.service.impl;
 
-import com.trainibit.first_api.dto.response.external.PlanetResponse;
 import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.mapper.UserMapper;
 import com.trainibit.first_api.repository.UserRepository;
@@ -12,18 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-//    private final PlanetService planetService;
-//
-//    public UserServiceImpl(PlanetService planetService) {
-//        this.planetService = planetService;
-//    }
 
     @Autowired
     private UserRepository userRepository;

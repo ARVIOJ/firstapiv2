@@ -49,9 +49,9 @@ public class User {
     @Column(name = "planet")
     private String planet;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "federal_state_id", nullable = false)
-    private FederalState federalState;
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "federal_state_id", nullable = false)
+//    private FederalState federalState;
 
     //mapeo entre User y rolesbyuser con
 }
