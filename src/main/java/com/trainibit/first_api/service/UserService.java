@@ -15,4 +15,10 @@ public interface UserService {
 
     //post
     UserResponse saveUser(UserRequest userRequest);
+
+    //eliminar
+    void deleteUser(UUID uuid);
+
+    //actualizar
+    UserResponse updateUser(UUID uuid,UserRequest userRequest);
 }

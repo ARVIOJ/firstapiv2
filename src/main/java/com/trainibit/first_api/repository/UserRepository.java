@@ -12,4 +12,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAll();
     User findByUuid(UUID uuid);
+
+    //eliminar por uuid
+    void deleteByUuid(UUID uuid);
+
+    //actualizar por uuid
+
 }

@@ -27,19 +27,7 @@ public class UserMapperImpl implements UserMapper {
         userResponse.setCreatedDate(user.getCreatedDate());
         userResponse.setUpdatedDate(user.getUpdatedDate());
         userResponse.setUuid(user.getUuid());
-
-//        //↓↓↓↓↓↓ Calcular años meses y dias ↓↓↓↓↓↓ //crear un metodo o lambads
-        LocalDate hoy = LocalDate.now();
-        LocalDate nacimiento = user.getBirthday();
-        Period periodo = Period.between(nacimiento, hoy);
-
-        String ageMessage = "Tienes " + periodo.getYears() + " años con " +
-                periodo.getMonths() + " meses y " +
-                periodo.getDays() + " días";
-//        //↑↑↑↑↑ Calcular años meses y dias ↑↑↑↑↑
-
-        userResponse.setAge(ageMessage);
-
+        userResponse.setAge(calculateAgeMessage(user.getBirthday()));
         userResponse.setPlanet(user.getPlanet());
 
         return userResponse;
@@ -68,6 +56,13 @@ public class UserMapperImpl implements UserMapper {
         return user;
     }
 
+    private String calculateAgeMessage(LocalDate birthDate) {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(birthDate, today);
 
+        return "Tienes " + period.getYears() + " años con " +
+                period.getMonths() + " meses y " +
+                period.getDays() + " días";
+    }
 
 }
