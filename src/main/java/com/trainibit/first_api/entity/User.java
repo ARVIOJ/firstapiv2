@@ -1,19 +1,13 @@
 package com.trainibit.first_api.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -49,9 +43,11 @@ public class User {
     @Column(name = "planet")
     private String planet;
 
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "federal_state_id", nullable = false)
-//    private FederalState federalState;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "federal_state_id", nullable = false)
+    private FederalState federalState;
 
-    //mapeo entre User y rolesbyuser con
+    //mapeo entre User y rolesbyuser
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RolesByUser> rolesByUser;
 }
