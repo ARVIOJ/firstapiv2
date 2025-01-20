@@ -58,14 +58,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    // @Transactional
     public void deleteUser(UUID uuid) {
         userRepository.deleteByUuid(uuid);
     }
 
     //actualizar
     @Override
-    @Transactional //que es
+    //@Transactional //que es
     public  UserResponse updateUser(UUID uuid, UserRequest userRequest){
         User existingUser = userRepository.findByUuid(uuid);
         if (existingUser != null) {

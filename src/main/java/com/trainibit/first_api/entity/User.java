@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public class User {
     @JoinColumn(name = "federal_state_id", nullable = false)
     private FederalState federalState;
 
-    //mapeo entre User y rolesbyuser
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RolesByUser> rolesByUser;
+   //mapeo entre User y rolesbyuser
+    @OneToMany( mappedBy = "user",fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    private List<RolesByUser> roles = new ArrayList<>();
 }

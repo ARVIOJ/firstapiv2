@@ -1,5 +1,6 @@
 package com.trainibit.first_api.mapper.Impl;
 
+import com.trainibit.first_api.entity.Role;
 import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.mapper.UserMapper;
 import com.trainibit.first_api.request.UserRequest;
@@ -29,6 +30,9 @@ public class UserMapperImpl implements UserMapper {
         userResponse.setUuid(user.getUuid());
         userResponse.setAge(calculateAgeMessage(user.getBirthday()));
         userResponse.setPlanet(user.getPlanet());
+        // userResponse.setFederalState();
+       // userResponse.setRoles();
+
 
         return userResponse;
     }
@@ -52,7 +56,6 @@ public class UserMapperImpl implements UserMapper {
         user.setLastName(userRequest.getLastName());
         user.setEmail(userRequest.getEmail());
         user.setBirthday(LocalDate.parse(userRequest.getBirthdate()));
-
         return user;
     }
 

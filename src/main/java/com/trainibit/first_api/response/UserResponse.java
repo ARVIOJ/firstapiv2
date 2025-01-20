@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -18,8 +19,9 @@ public class UserResponse {
     private Timestamp createdDate;
     private Timestamp updatedDate;
     private UUID uuid;
-
     private String age; // campo calculado, no debe ir en la base de datos este tipo de datos
     private String planet;
-
+// esto es nuevo
+    private FederaSatateResponse federalState;
+    private List<RoleResponse> roles;
 }
