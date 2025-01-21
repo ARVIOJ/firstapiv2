@@ -4,8 +4,8 @@ import com.trainibit.first_api.entity.Role;
 import com.trainibit.first_api.response.RoleResponse;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RoleMapper {
     RoleResponse entityToResponseRole(Role role);
-    List<RoleResponse> entityToResponseListRole(List<Role> roles);
 }

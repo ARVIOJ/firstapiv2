@@ -1,7 +1,9 @@
 package com.trainibit.first_api.service.impl;
 
+import com.trainibit.first_api.entity.FederalState;
 import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.mapper.UserMapper;
+import com.trainibit.first_api.repository.FederalStateRepository;
 import com.trainibit.first_api.repository.UserRepository;
 import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
@@ -27,6 +29,8 @@ public class UserServiceImpl implements UserService {
 
    @Autowired
    private PlanetService planetService;
+    @Autowired
+    private FederalStateRepository federalStateRepository;
 
     @Override
     public List<UserResponse> findAll() {
@@ -44,8 +48,9 @@ public class UserServiceImpl implements UserService {
     //post
     @Override
     public UserResponse saveUser(UserRequest userRequest) {
+        FederalState federalState = federalStateRepository.findByUuid(userRequest.getFederalState().getUuid());
 
-        User user = userMapper.requestToEntity(userRequest);
+        User user = userMapper.requestToEntity(userRequest, federalState);
 
         Timestamp currentTimeStamp = new Timestamp(System.currentTimeMillis());
 

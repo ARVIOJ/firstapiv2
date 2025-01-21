@@ -2,8 +2,7 @@ package com.trainibit.first_api.mapper.Impl;
 
 import com.trainibit.first_api.entity.FederalState;
 import com.trainibit.first_api.mapper.FederalStateMapper;
-import com.trainibit.first_api.response.FederaSatateResponse;
-import com.trainibit.first_api.response.RoleResponse;
+import com.trainibit.first_api.response.FederalStateResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +10,21 @@ import java.util.List;
 public class FederalStateMapperImpl implements FederalStateMapper {
 
     @Override
-    public FederaSatateResponse entityToResponseFederalResponse(FederalState federalState) {
-        FederaSatateResponse federaSatateResponse = new FederaSatateResponse();
+    public FederalStateResponse entityToResponseFederalResponse(FederalState federalState) {
+        FederalStateResponse federalStateResponse = new FederalStateResponse();
 
-        federaSatateResponse.setUuid(federalState.getUuid());
-        federaSatateResponse.setName(federalState.getName());
+        federalStateResponse.setUuid(federalState.getUuid());
+        federalStateResponse.setName(federalState.getName());
 
-        return federaSatateResponse;
+        return federalStateResponse;
     }
 
     @Override
-    public List<FederaSatateResponse> entityToResponseListFederalResponse(List<FederalState> federalStatesList) {
-        List<FederaSatateResponse> federalSatateResponseList = new ArrayList<>();
+    public List<FederalStateResponse> entityToResponseListFederalResponse(List<FederalState> federalStatesList) {
+        List<FederalStateResponse> federalStateResponseList = new ArrayList<>();
 
         //federalStatesList.forEach(federalState -> federalSatateResponseList.add(entityToResponseListFederalResponse(federalState)));
 
-        return federalSatateResponseList;
+        return federalStateResponseList;
     }
 }

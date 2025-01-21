@@ -1,5 +1,6 @@
 package com.trainibit.first_api.response;
 
+import com.trainibit.first_api.entity.FederalState;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,8 @@ public class UserResponse {
     private String age; // campo calculado, no debe ir en la base de datos este tipo de datos
     private String planet;
 // esto es nuevo
-    private FederaSatateResponse federalState;
+
+    //private FederaSatateResponse federalState;
+    private FederalStateResponse federalState;
     private List<RoleResponse> roles;
 }

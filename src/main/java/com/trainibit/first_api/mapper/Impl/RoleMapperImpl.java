@@ -9,29 +9,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RoleMapperImpl implements RoleMapper {
 
     @Override
     public RoleResponse entityToResponseRole(Role role) {
-
         RoleResponse roleResponse = new RoleResponse();
 
         roleResponse.setUuid(role.getUuid());
         roleResponse.setName(role.getName());
 
         return roleResponse;
-    }
-
-    @Override
-    public List<RoleResponse> entityToResponseListRole(List<Role> roleList) {
-
-        List<RoleResponse> roleResponseList = new ArrayList<>();
-
-        roleList.forEach(role -> roleResponseList.add(entityToResponseRole(role)));
-
-        return roleResponseList;
 
     }
+
 }

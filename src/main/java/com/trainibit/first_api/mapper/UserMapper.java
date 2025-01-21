@@ -1,5 +1,6 @@
 package com.trainibit.first_api.mapper;
 
+import com.trainibit.first_api.entity.FederalState;
 import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
@@ -13,6 +14,6 @@ public interface UserMapper {
     List<UserResponse> entityToResponseList(List<User> users);
 
     //post
-    User requestToEntity(UserRequest userRequest);
+    User requestToEntity(UserRequest userRequest, FederalState federalState);
 
 }

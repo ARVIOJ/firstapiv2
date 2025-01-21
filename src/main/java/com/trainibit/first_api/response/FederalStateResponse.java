@@ -7,7 +7,9 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class FederaSatateResponse {
+public class FederalStateResponse {
     String name;
     UUID uuid;
 }
+
+    

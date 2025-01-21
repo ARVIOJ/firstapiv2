@@ -10,4 +10,5 @@ import java.util.UUID;
 public class RoleResponse {
     String name;
     UUID uuid;
+
 }
