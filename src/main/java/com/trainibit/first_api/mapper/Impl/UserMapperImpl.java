@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,7 +84,7 @@ public class UserMapperImpl implements UserMapper {
         user.setLastName(userRequest.getLastName());
         user.setEmail(userRequest.getEmail());
         user.setBirthday(LocalDate.parse(userRequest.getBirthdate()));
-       // user.getFederalState(federalState);
+        user.setFederalState(federalState);
         return user;
     }
 

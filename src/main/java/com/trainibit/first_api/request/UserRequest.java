@@ -16,7 +16,8 @@ public class UserRequest {
     private String lastName;
     private String birthdate;
     private String email;
-    //esto es nuevo
+
     private FederalState federalState;
     private List<UUID> roles;
+
 }

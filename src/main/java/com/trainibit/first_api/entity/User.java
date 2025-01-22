@@ -1,6 +1,7 @@
 package com.trainibit.first_api.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,7 +49,7 @@ public class User {
     @JoinColumn(name = "federal_state_id", nullable = false)
     private FederalState federalState;
 
-   //mapeo entre User y rolesbyuser
+    @JsonManagedReference
     @OneToMany( mappedBy = "user",fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     private List<RolesByUser> roles = new ArrayList<>();
 }
