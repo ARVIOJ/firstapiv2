@@ -1,10 +1,14 @@
 package com.trainibit.first_api.service.impl;
 
 import com.trainibit.first_api.entity.FederalState;
+import com.trainibit.first_api.entity.Role;
+import com.trainibit.first_api.entity.RolesByUser;
 import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.mapper.UserMapper;
 import com.trainibit.first_api.repository.FederalStateRepository;
+import com.trainibit.first_api.repository.RoleRepository;
 import com.trainibit.first_api.repository.UserRepository;
+import com.trainibit.first_api.request.RolesRequest;
 import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
 import com.trainibit.first_api.service.PlanetService;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +36,8 @@ public class UserServiceImpl implements UserService {
    private PlanetService planetService;
     @Autowired
     private FederalStateRepository federalStateRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public List<UserResponse> findAll() {
@@ -48,7 +55,7 @@ public class UserServiceImpl implements UserService {
     //post
     @Override
     public UserResponse saveUser(UserRequest userRequest) {
-        FederalState federalState = federalStateRepository.findByUuid(userRequest.getFederalState().getUuid());
+        FederalState federalState = federalStateRepository.findByUuid(userRequest.getFederalState());
 
         User user = userMapper.requestToEntity(userRequest, federalState);
 
@@ -58,6 +65,25 @@ public class UserServiceImpl implements UserService {
         user.setUpdatedDate(currentTimeStamp);
         user.setUuid(UUID.randomUUID());
         user.setPlanet(getRandomPlanetName());
+        user.setFederalState(federalState);
+
+        List<RolesByUser> roles = new ArrayList<>();
+
+        if (userRequest.getRoles() != null) {
+            for (RolesRequest rolesRequest : userRequest.getRoles()) {
+                Role role = roleRepository.findByUuid(rolesRequest.getUuid());
+                System.out.println("ROLE");
+                System.out.println(role);
+                RolesByUser rolesByUser = new RolesByUser();
+                rolesByUser.setUser(user);
+                rolesByUser.setRole(role);
+                rolesByUser.setUuid(UUID.randomUUID());
+                roles.add(rolesByUser);
+            }
+            user.setRoles(roles);
+        }
+
+
 
         return userMapper.entityToResponse(userRepository.save(user));
     }
@@ -65,7 +91,7 @@ public class UserServiceImpl implements UserService {
     @Override
     // @Transactional
     public void deleteUser(UUID uuid) {
-        userRepository.deleteByUuid(uuid);
+        userRepository.delete(userRepository.findByUuid(uuid));
     }
 
     //actualizar

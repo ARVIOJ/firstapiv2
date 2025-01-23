@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface FederalStateRepository extends JpaRepository<FederalState, UUID> {
+public interface FederalStateRepository extends JpaRepository<FederalState, Long> {
     FederalState findByUuid(UUID uuid);
 }

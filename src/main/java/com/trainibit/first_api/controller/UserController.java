@@ -6,8 +6,10 @@ import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
 import com.trainibit.first_api.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +43,7 @@ public class UserController {
 
     // Crear un nuevo usuario
     @PostMapping
-    public ResponseEntity<UserResponse> saveUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserResponse> saveUser(@Valid @RequestBody UserRequest userRequest) {
         UserResponse newUser = userService.saveUser(userRequest);
         return ResponseEntity.ok(newUser);
     }

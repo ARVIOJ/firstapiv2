@@ -1,6 +1,8 @@
 package com.trainibit.first_api.request;
 
 import com.trainibit.first_api.entity.FederalState;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +14,18 @@ import java.util.UUID;
 @Setter
 public class UserRequest {
 
+    @NotNull
+    @Size(max=64)
     private String firstName;
+
     private String lastName;
+
     private String birthdate;
+
     private String email;
 
-    private FederalState federalState;
-    private List<UUID> roles;
+    private UUID federalState;
+
+    private List<RolesRequest> roles;
 
 }

@@ -25,11 +25,11 @@ public class Role {
     private String name;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date", nullable = false, insertable = false)
     private Timestamp createdDate;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "updated_date", nullable = false)
+    @Column(name = "updated_date", nullable = false, insertable = false)
     private Timestamp updatedDate;
 
     @Column(name = "uuid", nullable = false)

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,6 +25,7 @@ import java.util.UUID;
 @Table(name = "roles_by_users")
 public class RolesByUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -36,11 +39,11 @@ public class RolesByUser {
     private Role role;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date", nullable = false, insertable = false)
     private Timestamp createdDate;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "updated_date", nullable = false)
+    @Column(name = "updated_date", nullable = false, insertable = false)
     private Timestamp updatedDate;
 
     @Column(name = "uuid", nullable = false)
