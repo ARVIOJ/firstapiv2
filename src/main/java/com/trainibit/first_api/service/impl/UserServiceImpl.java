@@ -19,9 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -72,8 +70,6 @@ public class UserServiceImpl implements UserService {
         if (userRequest.getRoles() != null) {
             for (RolesRequest rolesRequest : userRequest.getRoles()) {
                 Role role = roleRepository.findByUuid(rolesRequest.getUuid());
-                System.out.println("ROLE");
-                System.out.println(role);
                 RolesByUser rolesByUser = new RolesByUser();
                 rolesByUser.setUser(user);
                 rolesByUser.setRole(role);
@@ -97,14 +93,36 @@ public class UserServiceImpl implements UserService {
     //actualizar
     @Override
     //@Transactional //que es
-    public  UserResponse updateUser(UUID uuid, UserRequest userRequest){
+    public UserResponse updateUser(UUID uuid, UserRequest userRequest) {
         User existingUser = userRepository.findByUuid(uuid);
         if (existingUser != null) {
+            FederalState federalState = federalStateRepository.findByUuid(userRequest.getFederalState());
             existingUser.setName(userRequest.getFirstName());
             existingUser.setLastName(userRequest.getLastName());
             existingUser.setEmail(userRequest.getEmail());
             existingUser.setBirthday(LocalDate.parse(userRequest.getBirthdate()));
             existingUser.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
+            existingUser.setFederalState(federalState);
+
+            // Clear existing roles
+            existingUser.getRoles().clear();
+
+            List<RolesByUser> roles = new ArrayList<>();
+            Set<UUID> uniqueRoleUuids = new HashSet<>();
+            if (userRequest.getRoles() != null) {
+                for (RolesRequest rolesRequest : userRequest.getRoles()) {
+                    if (uniqueRoleUuids.add(rolesRequest.getUuid())) {
+                        Role role = roleRepository.findByUuid(rolesRequest.getUuid());
+                        RolesByUser rolesByUser = new RolesByUser();
+                        rolesByUser.setUser(existingUser);
+                        rolesByUser.setRole(role);
+                        rolesByUser.setUuid(UUID.randomUUID());
+                        roles.add(rolesByUser);
+                    }
+                }
+                existingUser.getRoles().addAll(roles);
+            }
+
             return userMapper.entityToResponse(userRepository.save(existingUser));
         } else {
             return null;

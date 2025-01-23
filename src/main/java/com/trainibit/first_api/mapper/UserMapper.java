@@ -12,7 +12,6 @@ public interface UserMapper {
     UserResponse entityToResponse(User user);
     // ESTO ES NUEVO
     List<UserResponse> entityToResponseList(List<User> users);
-
     //post
     User requestToEntity(UserRequest userRequest, FederalState federalState);
 
