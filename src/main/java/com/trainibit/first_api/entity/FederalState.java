@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "federal_states")
-public class FederalState {
+public class FederalState implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;

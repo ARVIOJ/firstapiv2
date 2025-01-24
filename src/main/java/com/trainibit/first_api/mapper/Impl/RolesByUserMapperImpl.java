@@ -3,7 +3,9 @@ package com.trainibit.first_api.mapper.Impl;
 import com.trainibit.first_api.entity.RolesByUser;
 import com.trainibit.first_api.mapper.RolesByUserMapper;
 import com.trainibit.first_api.response.RolesByUserResponse;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RolesByUserMapperImpl implements RolesByUserMapper  {
 
     @Override
