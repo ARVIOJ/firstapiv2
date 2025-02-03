@@ -25,8 +25,9 @@ public class FederalStateMapperImpl implements FederalStateMapper {
     public List<FederalStateResponse> entityToResponseListFederalResponse(List<FederalState> federalStatesList) {
         List<FederalStateResponse> federalStateResponseList = new ArrayList<>();
 
-        federalStatesList.forEach(federalState -> federalStateResponseList.add(entityToResponseListFederalResponse(federalState)));
+        federalStatesList.forEach(federalState -> federalStateResponseList.add(entityToResponseFederalResponse(federalState)));
 
         return federalStateResponseList;
     }
+
 }

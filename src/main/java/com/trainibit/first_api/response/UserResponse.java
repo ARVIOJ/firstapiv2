@@ -27,4 +27,5 @@ public class UserResponse {
     //private FederaSatateResponse federalState;
     private FederalStateResponse federalState;
     private List<RoleResponse> roles;
+    private String token;
 }

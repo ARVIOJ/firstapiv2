@@ -9,5 +9,7 @@ import java.util.UUID;
 
 public interface FederalStateService {
     FederalState findByUuid(UUID uuid);
-    List<FederalStateResponse> findAll();
+    List<FederalStateResponse> getAllFederalStates();
+
+    //List<FederalStateResponse> findAll();
 }

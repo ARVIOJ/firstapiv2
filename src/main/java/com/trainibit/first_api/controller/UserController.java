@@ -5,6 +5,7 @@ package com.trainibit.first_api.controller;
 import com.trainibit.first_api.entity.User;
 import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.UserResponse;
+import com.trainibit.first_api.service.KafkaMessageProducer;
 import com.trainibit.first_api.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private KafkaMessageProducer kafkaMessageProducer;
 
     // Obtener todos los usuarios
     @GetMapping
@@ -45,6 +49,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> saveUser(@Valid @RequestBody UserRequest userRequest) {
         UserResponse newUser = userService.saveUser(userRequest);
+
         return ResponseEntity.ok(newUser);
     }
 

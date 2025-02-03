@@ -9,12 +9,14 @@ import com.trainibit.first_api.request.UserRequest;
 import com.trainibit.first_api.response.FederalStateResponse;
 import com.trainibit.first_api.response.RoleResponse;
 import com.trainibit.first_api.response.UserResponse;
+import lombok.ToString;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -35,6 +37,7 @@ public class UserMapperImpl implements UserMapper {
         userResponse.setUuid(user.getUuid());
         userResponse.setAge(calculateAgeMessage(user.getBirthday()));
         userResponse.setPlanet(user.getPlanet());
+        userResponse.setToken(randomToken());
 
         FederalState federalState = user.getFederalState();
 
@@ -62,6 +65,8 @@ public class UserMapperImpl implements UserMapper {
 
         userResponse.setRoles(roleResponse);
 
+
+
         return userResponse;
     }
 
@@ -88,6 +93,8 @@ public class UserMapperImpl implements UserMapper {
         return user;
     }
 
+    // funciones extras
+
     private String calculateAgeMessage(LocalDate birthDate) {
         LocalDate today = LocalDate.now();
         Period period = Period.between(birthDate, today);
@@ -95,6 +102,13 @@ public class UserMapperImpl implements UserMapper {
         return "Tienes " + period.getYears() + " años con " +
                 period.getMonths() + " meses y " +
                 period.getDays() + " días";
+    }
+
+    private String randomToken() {
+        Random random = new Random();
+        String token = random.nextInt(900000) + 100000 + "";
+
+        return token;
     }
 
 }

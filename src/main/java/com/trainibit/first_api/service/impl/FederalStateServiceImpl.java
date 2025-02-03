@@ -8,6 +8,7 @@ import com.trainibit.first_api.service.FederalStateService;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,16 +20,20 @@ public class FederalStateServiceImpl implements FederalStateService {
     @Autowired
     private FederalStateRepository federalStateRepository;
 
+    @Autowired
+    private FederalStateMapper federalStateMapper;
+
     @Override
     public FederalState findByUuid(UUID uuid) {
         log.info("Buscando estado federal por uuid: " + uuid);
         return federalStateRepository.findByUuid(uuid);
     }
 
-//    @Override
-//    public List<FederalStateResponse> findAll() {
-//        log.info("Buscando todos los estados federales");
-//        //return federalStateRepository.findAll();
-//    }
+    @Override
+    @Cacheable(value = "federalStates", key = "'all'")
+    public List<FederalStateResponse> getAllFederalStates() {
+        log.info("Obteniendo todas las entidades federativas desde la base de datos");
+        return federalStateMapper.entityToResponseListFederalResponse(federalStateRepository.findAll());
+    }
 
 }

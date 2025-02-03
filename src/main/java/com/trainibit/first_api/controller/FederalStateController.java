@@ -29,10 +29,10 @@ public class FederalStateController {
         return ResponseEntity.ok(federalStateService.findByUuid(uuid)).getBody();
     }
 
-    //get all
-    @GetMapping
-    public ResponseEntity<List<FederalStateResponse>> getFederalState() {
-
-        return ResponseEntity.ok(federalStateService.findAll());
-    }
+//    //get all
+//    @GetMapping
+//    public ResponseEntity<List<FederalStateResponse>> getFederalState() {
+//
+//        return ResponseEntity.ok(federalStateService.findAll());
+//    }
 }

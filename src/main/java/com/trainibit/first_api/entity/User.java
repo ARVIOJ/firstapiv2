@@ -52,4 +52,8 @@ public class User {
     @JsonManagedReference
     @OneToMany( mappedBy = "user",fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     private List<RolesByUser> roles = new ArrayList<>();
+
+    @Column(name = "token")
+    private String token;
+
 }
