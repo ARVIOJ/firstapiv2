@@ -10,7 +10,9 @@ import com.trainibit.first_api.repository.RoleRepository;
 import com.trainibit.first_api.repository.UserRepository;
 import com.trainibit.first_api.request.RolesRequest;
 import com.trainibit.first_api.request.UserRequest;
+import com.trainibit.first_api.response.KafkaResponse;
 import com.trainibit.first_api.response.UserResponse;
+import com.trainibit.first_api.service.KafkaMessageProducer;
 import com.trainibit.first_api.service.PlanetService;
 import com.trainibit.first_api.service.UserService;
 import jakarta.transaction.Transactional;
@@ -36,7 +38,8 @@ public class UserServiceImpl implements UserService {
     private FederalStateRepository federalStateRepository;
     @Autowired
     private RoleRepository roleRepository;
-
+    @Autowired
+    private KafkaMessageProducer kafkaMessageProducer;
     @Override
     public List<UserResponse> findAll() {
         return userMapper.entityToResponseList(userRepository.findAll());
@@ -79,9 +82,17 @@ public class UserServiceImpl implements UserService {
             user.setRoles(roles);
         }
 
+        User saveUser = userRepository.save(user);
 
+        KafkaResponse kafkaResponse = new KafkaResponse();
 
-        return userMapper.entityToResponse(userRepository.save(user));
+        kafkaResponse.setUuid(saveUser.getUuid());
+        kafkaResponse.setEmail(saveUser.getEmail());
+        kafkaResponse.setToken(saveUser.getToken());
+
+        kafkaMessageProducer.sendMessage(kafkaResponse);
+
+        return userMapper.entityToResponse(saveUser);
     }
 
     @Override

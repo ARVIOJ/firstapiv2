@@ -1,11 +1,9 @@
 package com.trainibit.first_api.service;
 
-import com.trainibit.first_api.request.KafkaRequest;
-import com.trainibit.first_api.request.UserRequest;
-import com.trainibit.first_api.response.UserResponse;
+import com.trainibit.first_api.response.KafkaResponse;
 
 public interface KafkaMessageProducer {
 
-    void sendMessage(KafkaRequest kafkaRequest);
+    void sendMessage(KafkaResponse kafkaResponse);
 
 }

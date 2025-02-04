@@ -1,4 +1,4 @@
-package com.trainibit.first_api.request;
+package com.trainibit.first_api.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class KafkaRequest {
+public class KafkaResponse {
     private UUID uuid;
     private String email;
     private String token;

@@ -1,5 +1,6 @@
 package com.trainibit.first_api.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trainibit.first_api.entity.FederalState;
 import com.trainibit.first_api.entity.Role;
 import com.trainibit.first_api.entity.RolesByUser;
@@ -10,6 +11,7 @@ import com.trainibit.first_api.repository.RoleRepository;
 import com.trainibit.first_api.repository.UserRepository;
 import com.trainibit.first_api.request.RolesRequest;
 import com.trainibit.first_api.request.UserRequest;
+import com.trainibit.first_api.response.KafkaResponse;
 import com.trainibit.first_api.response.UserResponse;
 import com.trainibit.first_api.service.KafkaMessageProducer;
 import com.trainibit.first_api.service.PlanetService;
@@ -32,24 +34,23 @@ public class KafkaMessageProducerImpl implements KafkaMessageProducer {
 
     private final String topicName = "USUARIO_REGISTRADO";
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
-    public void sendMessage(String message) {
-
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, message);
-        future.whenComplete((result, ex) -> {
-            if (ex == null) {
-                System.out.println("Sent message=[" + message +
-                        "] with offset=[" + result.getRecordMetadata().offset() + "]");
-            } else {
-                System.out.println("Unable to send message=[" +
-                        message + "] due to : " + ex.getMessage());
-            }
-        });
-
-
-  }
-
-
-
-
+    public void sendMessage(KafkaResponse kafkaResponse) {
+        try{
+            CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, kafkaResponse.getUuid().toString(), objectMapper.writeValueAsString(kafkaResponse));
+            future.whenComplete((result, ex) -> {
+                if (ex == null) {
+                    System.out.println("Sent message=[" + kafkaResponse.getEmail() +
+                            "] with offset=[" + result.getRecordMetadata().offset() + "]");
+                } else {
+                    System.out.println("Unable to send message=[" +
+                            kafkaResponse.getEmail() + "] due to : " + ex.getMessage());
+                }
+            });
+        }catch (Exception e){
+            throw new RuntimeException("Error converting kafkaResponse to JSON", e);
+        }
+    }
 }
