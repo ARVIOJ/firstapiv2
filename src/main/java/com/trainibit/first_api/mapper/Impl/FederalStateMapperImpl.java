@@ -4,7 +4,7 @@ import com.trainibit.first_api.entity.FederalState;
 import com.trainibit.first_api.mapper.FederalStateMapper;
 import com.trainibit.first_api.response.FederalStateResponse;
 import org.springframework.stereotype.Service;
-
+import org.springframework.kafka.core.KafkaTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
