@@ -37,8 +37,7 @@ public class UserMapperImpl implements UserMapper {
         userResponse.setUuid(user.getUuid());
         userResponse.setAge(calculateAgeMessage(user.getBirthday()));
         userResponse.setPlanet(user.getPlanet());
-        userResponse.setToken(randomToken());
-
+        userResponse.setToken(user.getToken());
         FederalState federalState = user.getFederalState();
 
         if (federalState != null) { // Si lo encuentra
@@ -90,6 +89,7 @@ public class UserMapperImpl implements UserMapper {
         user.setEmail(userRequest.getEmail());
         user.setBirthday(LocalDate.parse(userRequest.getBirthdate()));
         user.setFederalState(federalState);
+        user.setToken(userRequest.getToken());
         return user;
     }
 
@@ -104,11 +104,5 @@ public class UserMapperImpl implements UserMapper {
                 period.getDays() + " días";
     }
 
-    private String randomToken() {
-        Random random = new Random();
-        String token = random.nextInt(900000) + 100000 + "";
-
-        return token;
-    }
 
 }

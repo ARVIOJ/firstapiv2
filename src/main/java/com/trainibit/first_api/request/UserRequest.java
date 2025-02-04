@@ -41,4 +41,6 @@ public class UserRequest {
 
     private List<RolesRequest> roles;
 
+    private String token;
+
 }

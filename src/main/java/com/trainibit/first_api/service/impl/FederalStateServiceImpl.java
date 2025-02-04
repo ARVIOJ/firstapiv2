@@ -5,7 +5,7 @@ import com.trainibit.first_api.mapper.FederalStateMapper;
 import com.trainibit.first_api.repository.FederalStateRepository;
 import com.trainibit.first_api.response.FederalStateResponse;
 import com.trainibit.first_api.service.FederalStateService;
-import lombok.extern.java.Log;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

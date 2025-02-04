@@ -32,14 +32,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-   @Autowired
-   private PlanetService planetService;
+    @Autowired
+    private PlanetService planetService;
+
     @Autowired
     private FederalStateRepository federalStateRepository;
+
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
     private KafkaMessageProducer kafkaMessageProducer;
+
     @Override
     public List<UserResponse> findAll() {
         return userMapper.entityToResponseList(userRepository.findAll());
@@ -67,6 +71,7 @@ public class UserServiceImpl implements UserService {
         user.setUuid(UUID.randomUUID());
         user.setPlanet(getRandomPlanetName());
         user.setFederalState(federalState);
+        user.setToken(createToken());
 
         List<RolesByUser> roles = new ArrayList<>();
 
@@ -147,5 +152,11 @@ public class UserServiceImpl implements UserService {
         System.out.println(planetResponse);
         return planetResponse;
     }
+
+    private String createToken() {
+        Random random = new Random();
+        return 100000 + random.nextInt(900000) + "";
+    }
+
 
 }

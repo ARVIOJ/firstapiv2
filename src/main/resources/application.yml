@@ -24,3 +24,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+
+# Configuración específica del tópico de Kafka
+kafka:
+  topic:
+    name: USUARIO_REGISTRADO

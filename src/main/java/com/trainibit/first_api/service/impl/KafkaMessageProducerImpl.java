@@ -20,7 +20,7 @@ public class KafkaMessageProducerImpl implements KafkaMessageProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
-    @Value("${kafka.topic.name:USUARIO_REGISTRADO}")
+    @Value("${kafka.topic.name}")
     private String topicName;
 
     @Override
